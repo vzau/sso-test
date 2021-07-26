@@ -1,5 +1,7 @@
 # SSO Demo
 
+**VERY SLOPPY**
+
 Edit index.js, modify the 4 variables at the top
 Run node index.js
 

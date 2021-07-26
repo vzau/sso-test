@@ -1,9 +1,13 @@
 // Configuration:
-const clientId = "0";
-const clientSecret = "0";
-const accessTokenUri = "https://auth.kzdv.dev/v1/token";
-const authorizationUri = "https://auth.kzdv.dev/v1/authorize";
-const redirectUri = "http://local.kzdv.dev:8000/callback";
+const clientId = "";
+const clientSecret = "";
+//const accessTokenUri = "https://auth.dev.chicagoartcc.org/oauth/token";
+//const authorizationUri = "https://auth.dev.chicagoartcc.org/oauth/authorize";
+//const accessTokenUri = "http://local.chicagoartcc.org:3000/oauth/token";
+//const authorizationUri = "http://local.chicagoartcc.org:3000/oauth/authorize";
+const accessTokenUri = "https://auth.chicagoartcc.org/oauth/token";
+const authorizationUri = "https://auth.chicagoartcc.org/oauth/authorize";
+const redirectUri = "http://local.chicagoartcc.org:8000/callback";
 
 const express = require("express")
 const app = express()
@@ -57,9 +61,9 @@ app.get("/login", (req, res) => {
     let uri = auth.code.getUri({
         state: req.session.state,
         query: {
-            code_challenge_method: "S256",
-            code_challenge: createCodeChallenge(req.session.code_verifier),
-            response_type: "token",
+//            code_challenge_method: "S256",
+//            code_challenge: createCodeChallenge(req.session.code_verifier),
+            response_type: "code",
         }
     });
 
@@ -71,7 +75,7 @@ app.get("/callback", (req, res) => {
     auth.code.getToken(req.originalUrl, {
         state: req.session.state,
         body: {
-            code_verifier: req.session.code_verifier,
+//            code_verifier: req.session.code_verifier,
             client_secret: clientSecret,
             client_id: clientId,
         }
